@@ -1,26 +1,27 @@
-const express = require('express')
-const path = require('path')
-const blogs = require('../Data/blogs')
-const router = express.Router()
+const express = require('express');
+const path = require('path');
+const blogs = require('../Data/blogs');
+const router = express.Router();
 
-// router create
+// Route: Home Page
 router.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, '../templete/index.html'))
-})
-
-router.get('/blog', (req, res) => {
-      // blogs.forEach(e => {
-      //       console.log(e.title)
-
-      // });
-      res.sendFile(path.join(__dirname, '../templete/bloghome.html'))
-})
-router.get('/blogpost/:slug', (req, res) => {
-      myBlog = blogs.filter((e)=>{  
-            return e.slug == req.params.slug
-      })
-
-      res.sendFile(path.join(__dirname, '../templete/blogpage.html'));
+    res.render('home'); // views/home.handlebars
 });
 
-module.exports = router
+// Route: Blog Home Page - list of blogs
+router.get('/blog', (req, res) => {
+    res.render('bloghome', { blogs }); // views/bloghome.handlebars
+});
+
+// Route: Single Blog Page
+router.get('/blogpost/:slug', (req, res) => {
+    const myBlog = blogs.find((e) => e.slug === req.params.slug);
+
+    if (myBlog) {
+        res.render('blogpage', { blog: myBlog }); // views/blogpage.handlebars
+    } else {
+        res.status(404).send('Blog not found');
+    }
+});
+
+module.exports = router;
