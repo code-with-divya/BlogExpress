@@ -1,25 +1,22 @@
-blogs = {
+const blogs = {
     blogs: [
         {
             title: "how to gets start with NodeJs",
             content: "This is content NodeJs",
-            slug:"NodeJS Learn"
+            slug: "nodejs-learn"
         },
         {
             title: "how to gets start with ExpressJS",
             content: "This is content ExpressJS",
-            slug:"ExpressJs Learn"
+            slug: "expressjs-learn"
         },
-        {
-            title: "how to gets start with ReactJS",
-            content: "This is content ReactJS",
-            slug:"ReactJs Learn"
-        },
-        {
+         {
             title: "how to gets start with AngularJS",
             content: "This is content AngularJS",
-            slug:"AngularJS Learn"
+            slug: "angularjs-learn"
         },
+    
     ]
-}
+};
+
 module.exports = blogs;

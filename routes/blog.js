@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const blogs = require('../Data/blogs');
+const { blogs } = require('../Data/blogs');
 const router = express.Router();
 
 // Route: Home Page
@@ -15,10 +15,15 @@ router.get('/blog', (req, res) => {
 
 // Route: Single Blog Page
 router.get('/blogpost/:slug', (req, res) => {
-    const myBlog = blogs.find((e) => e.slug === req.params.slug);
+    const myBlog = blogs.filter((e) => {
+        return e.slug === req.params.slug;
+    });
 
-    if (myBlog) {
-        res.render('blogpage', { blog: myBlog }); // views/blogpage.handlebars
+    if (myBlog.length > 0) {
+        res.render('blogpage', {
+            title: myBlog[0].title,
+            content: myBlog[0].content
+        });
     } else {
         res.status(404).send('Blog not found');
     }
